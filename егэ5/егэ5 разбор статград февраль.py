@@ -55,7 +55,7 @@ for i in range(b,a-1,-1):
         n += '0'
     r = int(n, 2)
     if 123456789<=r<=1987654321:
-        print(i,'ok, right
+        print(i,'ok, right')
 
         
         right = i
