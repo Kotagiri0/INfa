@@ -1,27 +1,18 @@
-from collections import Counter
+def t(s):
+    a=s.split('.')
+    return int(a[0])*2563+int(a[1])*2562+int(a[2])*256+int(a[3])
 
-count = 0
+def ok(a,b,p):
+    size=2**(32-p)
+    if a//size==b//size: return False
+    if a%size in (0,size-1): return False
+    if b%size in (0,size-1): return False
+    return True
 
-with open('09_6602.xls') as f:
-    for line in f:
-        # Преобразуем строку в список чисел
-        nums = list(map(int, line.split()))
-        if len(nums) != 6:
-            continue  # пропускаем странные строки
+a=t("192.168.106.35"); b=t("192.168.106.117")
+L=[p for p in range(1,31) if ok(a,b,p)]
+print(min(L), max(L))
 
-        freq = Counter(nums)
-
-        # Числа, которые повторяются ровно дважды
-        repeated = [x for x, c in freq.items() if c == 2]
-        # Остальные, которые встречаются ровно один раз
-        others = [x for x, c in freq.items() if c == 1]
-
-        # Условие 1: одно число повторяется 2 раза, остальные разные
-        if len(repeated) == 1 and len(others) == 4:
-            rep_num = repeated[0]
-            avg_unique = sum(others) / len(others)
-            # Условие 2: среднее неповторяющихся ≥ суммы повторяющихся
-            if avg_unique >= 2 * rep_num:
-                count += 1
-
-print(count)
+a=t("156.77.32.127"); b=t("156.77.117.78")
+L=[p for p in range(1,31) if ok(a,b,p)]
+print(max(L))
